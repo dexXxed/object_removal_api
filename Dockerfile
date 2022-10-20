@@ -4,6 +4,7 @@ RUN apt-get update
 RUN apt-get install ffmpeg libsm6 libxext6 curl -y
 
 WORKDIR /app
+EXPOSE 80
 
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
