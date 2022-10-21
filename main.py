@@ -28,7 +28,8 @@ def schema():
 app = FastAPI()
 app.openapi = schema
 
-logger = logging.getLogger('gunicorn.info')
+logger = logging.getLogger('gunicorn.error')
+logger.setLevel(logging.INFO)
 
 
 @app.get('/')

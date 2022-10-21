@@ -32,7 +32,8 @@ os.environ["NUMEXPR_NUM_THREADS"] = NUM_THREADS
 if os.environ.get("CACHE_DIR"):
     os.environ["TORCH_HOME"] = os.environ["CACHE_DIR"]
 
-logger = logging.getLogger('gunicorn.info')
+logger = logging.getLogger('gunicorn.error')
+logger.setLevel(logging.INFO)
 # For Seam-carving
 
 from scipy import ndimage as ndi
