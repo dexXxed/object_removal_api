@@ -429,10 +429,10 @@ def process_inpaint(image, mask):
     size_limit = max(image.shape)
 
     print(f"Origin image shape: {original_shape}")
-    logger.log(f"Origin image shape: {original_shape}")
+    logger.info(f"Origin image shape: {original_shape}")
     image = resize_max_size(image, size_limit=size_limit, interpolation=interpolation)
     print(f"Resized image shape: {image.shape}")
-    logger.log(f"Resized image shape: {image.shape}")
+    logger.info(f"Resized image shape: {image.shape}")
     image = norm_img(image)
 
     mask = 255 - mask[:, :, 3]
