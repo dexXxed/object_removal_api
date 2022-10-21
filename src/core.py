@@ -413,7 +413,7 @@ def run(image, mask):
         inpainted_image = model(image, mask)
 
     print(f"process time: {(time.time() - start) * 1000}ms")
-    logger.log(f"process time: {(time.time() - start) * 1000}ms")
+    logger.info(f"process time: {(time.time() - start) * 1000}ms")
     cur_res = inpainted_image[0].permute(1, 2, 0).detach().cpu().numpy()
     cur_res = cur_res[0:origin_height, 0:origin_width, :]
     cur_res = np.clip(cur_res * 255, 0, 255).astype("uint8")
