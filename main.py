@@ -1,5 +1,6 @@
 import glob
 import io
+import logging
 import os
 import uuid
 from typing import Union, Dict
@@ -26,6 +27,7 @@ def schema():
 
 app = FastAPI()
 app.openapi = schema
+logger = logging.getLogger(__name__)
 
 
 @app.get('/')
@@ -76,4 +78,5 @@ async def upload_image_and_mask(image_to_process: Union[UploadFile, None] = None
 
             return FileResponse(save_here)
         except Exception as e:
+            logger.log(f"Error: {e}")
             return {"message": "Please provide correct file for the mask!"}
