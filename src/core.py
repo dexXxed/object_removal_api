@@ -5,6 +5,7 @@ import time
 import cv2
 import numpy as np
 import torch
+import logging
 
 
 try:
@@ -31,6 +32,7 @@ os.environ["NUMEXPR_NUM_THREADS"] = NUM_THREADS
 if os.environ.get("CACHE_DIR"):
     os.environ["TORCH_HOME"] = os.environ["CACHE_DIR"]
 
+logger = logging.getLogger(__name__)
 # For Seam-carving
 
 from scipy import ndimage as ndi
@@ -411,6 +413,7 @@ def run(image, mask):
         inpainted_image = model(image, mask)
 
     print(f"process time: {(time.time() - start) * 1000}ms")
+    logger.log(f"process time: {(time.time() - start) * 1000}ms")
     cur_res = inpainted_image[0].permute(1, 2, 0).detach().cpu().numpy()
     cur_res = cur_res[0:origin_height, 0:origin_width, :]
     cur_res = np.clip(cur_res * 255, 0, 255).astype("uint8")
@@ -426,8 +429,10 @@ def process_inpaint(image, mask):
     size_limit = max(image.shape)
 
     print(f"Origin image shape: {original_shape}")
+    logger.log(f"Origin image shape: {original_shape}")
     image = resize_max_size(image, size_limit=size_limit, interpolation=interpolation)
     print(f"Resized image shape: {image.shape}")
+    logger.log(f"Resized image shape: {image.shape}")
     image = norm_img(image)
 
     mask = 255 - mask[:, :, 3]

@@ -18,3 +18,5 @@ RUN pip install --no-cache-dir --upgrade -r requirements.txt
 COPY . .
 
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "80"]
+
+# sudo gunicorn -D -k uvicorn.workers.UvicornWorker -b 0.0.0.0:80 --workers 4 --timeout 5000 main:app
