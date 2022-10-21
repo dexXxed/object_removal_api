@@ -27,7 +27,8 @@ def schema():
 
 app = FastAPI()
 app.openapi = schema
-logger = logging.getLogger(__name__)
+
+logger = logging.getLogger('gunicorn.info')
 
 
 @app.get('/')
