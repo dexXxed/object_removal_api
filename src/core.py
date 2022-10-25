@@ -47,7 +47,7 @@ USE_FORWARD_ENERGY = True  # if True, use forward energy algorithm
 
 device = torch.device("cuda")
 model_path = "./assets/big-lama.pt"
-model = torch.jit.load(model_path, map_location="cuda")
+model = torch.jit.load(model_path, map_location="cpu")
 model = model.to(device)
 model.eval()
 
