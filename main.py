@@ -1,6 +1,7 @@
 import glob
 import io
 import logging
+import torch
 import os
 import uuid
 from typing import Union, Dict
@@ -74,6 +75,8 @@ async def upload_image_and_mask(image_to_process: Union[UploadFile, None] = None
 
             output = process_inpaint(np.array(img_input), np.array(image_mask))
             img_output = Image.fromarray(output).convert("RGB")
+
+            torch.cuda.empty_cache()
 
             save_here = f"./images/{str(uuid.uuid1())}.jpeg"
             img_output.save(save_here)
