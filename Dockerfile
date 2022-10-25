@@ -20,3 +20,4 @@ COPY . .
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "80"]
 
 # sudo gunicorn -D -k uvicorn.workers.UvicornWorker -b 0.0.0.0:80 --workers 4 --timeout 5000 main:app
+# sudo gunicorn -k uvicorn.workers.UvicornWorker -b 0.0.0.0:80 --workers 4 --timeout 5000 --access-logfile ./gpu_logs.log --log-file ./gpu_logs.log --log-level info --capture-output main:app
